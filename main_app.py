@@ -45,12 +45,12 @@ st.markdown("""
         color: #555;
         line-height: 1.4;
     }
-    .tag-ia { color: #8B0000; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
+    .tag-ia { color: #FF6200; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
     
     .tag-titulo-tda { color: #555; font-size: 0.7rem; }
     
     .tag-titulo-user-ok { color: #668555; font-size: 0.7rem; }
-    .tag-titulo-user-ko { color: #8B0000; font-size: 0.7rem; }
+    .tag-titulo-user-ko { color: #FF6200; font-size: 0.7rem; }
     /* Ajustes en el Sidebar */
     [data-testid="stSidebar"] {
         background-color: #f0f2f6;
@@ -60,24 +60,28 @@ st.markdown("""
 
 # 3. DICCIONARIOS DE APLICACIONES (LÓGICA INTERNA)
 IA_APPS = {
-    "1 - Facturas PDF": "app0",
-    "2 - Transcripción de Audio": "app0"
+    "   Emisores": "app1"
+   
 }
 DS_APPS = {
-    "1 - Cuadrator": "app0",
-    "2 - Flujos Bloomberg": "app0", 
+    "Listado Historico": "app2"
+
 }
 WS_APPS = {
-    "1 - Eventos Relevantes.": "app0", 
-    "2 - Estados Financieros.": "app0"
+    "Trimestrales": "app3"
+  
 }
 RP_APPS = {
-    "1 - Eventos Relevantes": "app0",   
-    "2 - Estados Financieros": "app0",   
+    "Publicaciones": "app4",
+    "Festivos": "app5",  
+  
 }
-GP_APPS = {"Desarrollo VBA / PYTHON": "app0"}
+GP_APPS = {"Semanales / Mensuales   ": "app6"}
 
-XX_APPS = {"En progreso": "app0"}
+XX_APPS = {"Bolsa-MX": "app7",
+           "Global": "app8"
+           }
+
 
 TODAS_LAS_APPS = {**IA_APPS, **DS_APPS, **WS_APPS, **RP_APPS, **GP_APPS, **XX_APPS}
 
@@ -90,69 +94,93 @@ def get_image_base64(path):
 
 def mostrar_inicio():
     # HEADER CON LOGO
-    COL_ANCHO = 2.5
+    COL_ANCHO = 0.5
 
     col_t1, col_t2, col_t3 = st.columns([3, COL_ANCHO ,1])
     with col_t1:
-        #st.title("Sistema Central de Inteligencia y Datos")
-        #st.subheader("Titulización de Activos S.A.")
+        st.caption("""
+                   -----------------------------------------------------------------
+
+                   📢 [Ticker Noticias / Indicadores] .............23234.......56456456.......rfg_34535........................
+
+                   -----------------------------------------------------------------
+                   """)
         
-        st.markdown(f'<p class="tag-titulo-tda">⬅️ Seleccione una herramienta en el panel izquierdo para comenzar.</p>', unsafe_allow_html=True)
+        #st.markdown(f'<p class="tag-titulo-tda">⬅️ Seleccione una herramienta en el panel izquierdo para comenzar.</p>', unsafe_allow_html=True)
         
     with col_t3:
         try:
-            logo = Image.open("img/logotipo.gif")
-            st.image(logo, width=150)
+            logo = Image.open("img/logo_multiva2.png")
+            st.image(logo)  # , width=150
+            
         except: pass
 
     #st.markdown("Bienvenido al portal analítico. Seleccione una herramienta en el panel izquierdo para comenzar.")
     #st.markdown('<p class="tag-titulo-tda">Bienvenido al portal analítico. Seleccione una herramienta en el panel izquierdo para comenzar.</p>', unsafe_allow_html=True)
 
-    # --- SECCIÓN IA ---
-    st.markdown('<h3 class="fin-header">Inteligencia Artificial 🤖</h3>', unsafe_allow_html=True)
+    # --- 🏛️ Fideicomisos y Emisiones ---
+    st.markdown('<h3 class="fin-header">🏛️ Fideicomisos y Emisiones</h3>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.markdown('<div class="app-card"><h4>Facturas PDF</h4><p class="tag-ia">Automatización</p><p class="small-text-fin">Extracción de datos estructurados mediante modelos de visión y lenguaje.</p></div>', unsafe_allow_html=True)
-        st.markdown('<div class="app-card"><h4>SmartMail</h4><p class="tag-ia">NLP</p><p class="small-text-fin">Análisis de correos críticos y extracción de entidades clave.</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-card"><h4>Emisores</h4><p class="tag-ia">Shared Folder</p><p class="small-text-fin">Datos de Documentos, etc, etc... etc.....</p></div>', unsafe_allow_html=True)
+        pass
     with c2:
-        st.markdown('<div class="app-card"><h4>Transcripción</h4><p class="tag-ia">Audio Intelligence</p><p class="small-text-fin">Conversión de voz a texto y generación automática de minutas.</p></div>', unsafe_allow_html=True)
-        st.markdown('<div class="app-card"><h4>Contratos PDF</h4><p class="tag-ia">Legal Tech</p><p class="small-text-fin">Análisis masivo de cláusulas por bloques sin límite de contexto.</p></div>', unsafe_allow_html=True)
+        #st.markdown('<div class="app-card"><h4>Transcripción</h4><p class="tag-ia">Audio Intelligence</p><p class="small-text-fin">Conversión de voz a texto y generación automática de minutas.</p></div>', unsafe_allow_html=True)
+        pass
     with c3:
-        st.markdown('<div class="app-card"><h4>ChatTDA</h4><p class="tag-ia">Assistant</p><p class="small-text-fin">Interfaz conversacional inteligente con soporte para documentos internos.</p></div>', unsafe_allow_html=True)
+        #st.markdown('<div class="app-card"><h4>ChatTDA</h4><p class="tag-ia">Assistant</p><p class="small-text-fin">Interfaz conversacional inteligente con soporte para documentos internos.</p></div>', unsafe_allow_html=True)
+        pass
 
-    # --- SECCIÓN DATA SCIENCE ---
-    st.markdown('<h3 class="fin-header">Data Science & Analytics 🔬</h3>', unsafe_allow_html=True)
+    # --- 🚨 Eventos Relevantes ---
+    st.markdown('<h3 class="fin-header">🚨 Eventos Relevantes</h3>', unsafe_allow_html=True)
     cd1, cd2, cd3 = st.columns(3)
     with cd1:
-        st.markdown('<div class="app-card"><h4>Cuadrator</h4><p class="tag-ia">Quantitative</p><p class="small-text-fin">Simulaciones Montecarlo y análisis probabilístico de carteras de préstamos.</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-card"><h4>xxxxx</h4><p class="tag-ia">xxxxx</p><p class="small-text-fin">xxxxxxxxxxxx.</p></div>', unsafe_allow_html=True)
     with cd2:
-        st.markdown('<div class="app-card"><h4>Flujos Bloomberg</h4> <p class="tag-ia">Treasury Operations</p>  <p class="small-text-fin">Procesamiento y conversión de flujos de inversión para la integración directa con terminales Bloomberg.</p></div>', unsafe_allow_html=True)
+        #st.markdown('<div class="app-card"><h4>Flujos Bloomberg</h4> <p class="tag-ia">Treasury Operations</p>  <p class="small-text-fin">Procesamiento y conversión de flujos de inversión para la integración directa con terminales Bloomberg.</p></div>', unsafe_allow_html=True)
+        pass
     with cd3:
-        st.markdown('<div class="app-card"><h4>Entidades Financieras</h4> <p class="tag-ia">Official Historical Registry</p> <p class="small-text-fin">Visualización y seguimiento histórico de las Entidades Financieras registradas en el Banco de España. </p></div>', unsafe_allow_html=True)
+        pass
+        #st.markdown('<div class="app-card"><h4>Entidades Financieras</h4> <p class="tag-ia">Official Historical Registry</p> <p class="small-text-fin">Visualización y seguimiento histórico de las Entidades Financieras registradas en el Banco de España. </p></div>', unsafe_allow_html=True)
 
-    # --- SECCIÓN WEB SCRAPING ---
-    st.markdown('<h3 class="fin-header">Web Scraping & Market Intelligence 🌐</h3>', unsafe_allow_html=True)
+    # --- 📑 Reportes de Emisores ---
+    st.markdown('<h3 class="fin-header">📑 Reportes de Emisores</h3>', unsafe_allow_html=True)
     cw1, cw2, cw3 = st.columns(3)
     with cw1:
-        st.markdown('<div class="app-card"><h4>Eventos Relevantes</h4> <p class="tag-ia">Market Monitoring</p> <p class="small-text-fin">Captura automatizada y vigilancia en tiempo real de avisos corporativos en BMV y BIVA.</p></div>', unsafe_allow_html=True)
-                                                                                                                                                 
+        st.markdown('<div class="app-card"><h4>xxxxx</h4><p class="tag-ia">xxxxx</p><p class="small-text-fin">xxxxxxxxxxxx.</p></div>', unsafe_allow_html=True)                                                                                                                                         
     with cw2:
-        st.markdown('<div class="app-card"><h4>Estados Financieros</h4> <p class="tag-ia">Data Extraction</p>  <p class="small-text-fin">Extracción bajo demanda de reportes financieros oficiales desde el repositorio de la CNBV.</p></div>', unsafe_allow_html=True)
-
-    # --- SECCIÓN REPORTING ---
-    st.markdown('<h3 class="fin-header">Reporting & Dashboards 📊</h3>', unsafe_allow_html=True)
+        #st.markdown('<div class="app-card"><h4>Estados Financieros</h4> <p class="tag-ia">Data Extraction</p>  <p class="small-text-fin">Extracción bajo demanda de reportes financieros oficiales desde el repositorio de la CNBV.</p></div>', unsafe_allow_html=True)
+        pass    
+    # --- 📅 Calendario Operativo ---
+    st.markdown('<h3 class="fin-header">📅 Calendario Operativo</h3>', unsafe_allow_html=True)
     cr1, cr2, cr3 = st.columns(3)
     with cr1:
-        st.markdown('<div class="app-card"><h4>Eventos Relevantes</h4> <p class="tag-ia">Historical Analytics</p> <p class="small-text-fin">Visualización y seguimiento histórico de hechos de importancia de emisores TdA publicados en BMV y BIVA. </p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-card"><h4>Publicaciones</h4> <p class="tag-ia">xxxxxx</p> <p class="small-text-fin">xxxxxxxxx. </p></div>', unsafe_allow_html=True)
     with cr2:
-        st.markdown('<div class="app-card"><h4>Estados Financieros</h4> <p class="tag-ia">Regulatory Compliance</p>  <p class="small-text-fin">Módulo de extracción y análisis financiero automatizado de reportes regulatorios ante la CNBV.</p></div>', unsafe_allow_html=True)
-        
+        st.markdown('<div class="app-card"><h4>Festivos</h4> <p class="tag-ia">xxxxxxxx</p>  <p class="small-text-fin">xxxxxxxxxxxxxxx.</p></div>', unsafe_allow_html=True) 
     with cr3:
-        st.markdown('<div class="app-card"><h4>Analizador Financiero</h4> <p class="tag-ia">Banxico & Yahoo Finance API</p>  <p class="small-text-fin">Extracción y visualización de indicadores económicos y bursátiles históricos para análisis corporativo.</p></div>', unsafe_allow_html=True)
-                                                                                                                                          
+        pass
+        #st.markdown('<div class="app-card"><h4>Analizador Financiero</h4> <p class="tag-ia">Banxico & Yahoo Finance API</p>  <p class="small-text-fin">Extracción y visualización de indicadores económicos y bursátiles históricos para análisis corporativo.</p></div>', unsafe_allow_html=True)
+
+
+    # --- ✅ Tareas Programadas ---
+    st.markdown('<h3 class="fin-header">✅ Tareas Programadas</h3>', unsafe_allow_html=True)
+    cw1, cw2, cw3 = st.columns(3)
+    with cw1:
+        st.markdown('<div class="app-card"><h4>xxxxx</h4><p class="tag-ia">xxxxx</p><p class="small-text-fin">xxxxxxxxxxxx.</p></div>', unsafe_allow_html=True)                                                                                                                                         
+    
+
+    # --- 📊 Indicadores Económicos ---
+    st.markdown('<h3 class="fin-header">📊 Indicadores Económicos</h3>', unsafe_allow_html=True)
+    cw1, cw2, cw3 = st.columns(3)
+    with cw1:
+        st.markdown('<div class="app-card"><h4>xxxxx</h4><p class="tag-ia">xxxxx</p><p class="small-text-fin">xxxxxxxxxxxx.</p></div>', unsafe_allow_html=True)                                                                                                                                         
+    
+
+
     # --- FOOTER ---
     st.markdown("---")
-    img_b64 = get_image_base64("img/logotipo.ico")
+    img_b64 = get_image_base64("img/logotipo.ico")     
     if img_b64:
         st.markdown(f"<div style='text-align: center;'><img src='data:image/png;base64,{img_b64}' width='30'><br><small>© {datetime.now().year} Titulización de Activos S.A. - Confidencial</small></div>", unsafe_allow_html=True)
 
@@ -187,12 +215,12 @@ if st.session_state.selected_app_key is None:
     st.sidebar.markdown("---")
     # https://fonts.google.com/icons?utm_source=chatgpt.com&icon.size=24&icon.color=%238B1A10&icon.set=Material+Icons&selected=Material+Icons+Outlined:build:
     cats = {
-        "Gestión de Fideicomisos": (IA_APPS, "handshake"),      # handshake o account_balance
-        "Radar Multiva": (DS_APPS, "sensors"),                  # sensors o radar
-        "Monitor de Emisores": (WS_APPS, "domain"),           # domain o corporate_fare
-        "Control de Operaciones": (RP_APPS, "settings_suggest"),     # settings_suggest o fact_check
-        "Centro de Información": (GP_APPS, "menu_book"),    # menu_book o info
-        "xxx": (XX_APPS, "build")  
+        "Fideicomisos y Emisiones": (IA_APPS, "handshake"),          # handshake o account_balance
+        "Eventos Relevantes": (DS_APPS, "sensors"),                  # sensors o radar
+        "Reportes de Emisores": (WS_APPS, "domain"),                 # domain o corporate_fare
+        "Calendario Operativo": (RP_APPS, "calendar_month"),      # 
+        "Tareas Programadas": (GP_APPS, "menu_book"),            # menu_book o info
+        "Indicadores Económicos ": (XX_APPS, "timeline")        # timeline o line_axis
     }
     
     for titulo, (dicc, icono) in cats.items():
@@ -233,10 +261,10 @@ with st.sidebar.expander("System Status & Support : 🟢", icon=":material/termi
 ┌──────────────────────────┐
 │  NETWORK CONNECTED [OK]  │
 └──────────────────────────┘
- 🌐 IP    : {USER_IP}
+ 🌐 IP: {USER_IP}
     
 ───────────────────────────
- 🆘 HELP  : Steve Carpio
+ 🆘 HELP: xxxx@tda-sgft.com
 ───────────────────────────
     
     ⚙️ INFRASTRUCTURE:
@@ -244,8 +272,6 @@ with st.sidebar.expander("System Status & Support : 🟢", icon=":material/termi
  🐧 Kernel: Linux 6.17
  🚀 App   : Streamlit 
  📊 Data  : Pandas 2.3
- 🦙 IACore: Ollama (TDA)
- 🧠 Model : Custom Trained
     """, language=None)
 
     st.status("**Robot-System-IA** | Syncing...", state="running", )
