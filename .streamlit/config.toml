@@ -1,0 +1,23 @@
+#  STEVE ESTE ES EL QUE SE EJECUTA EN EL PROYECTO
+
+[server]
+maxCachedMessageAge = 0
+
+[browser]
+gatherUsageStats = false
+serverAddress = "10.10.30.7"
+serverPort = 8501
+
+[theme]
+base = "light"          # Establece el tema por defecto
+# primaryColor = "#5681d0"
+# #backgroundColor = "#212750"
+# secondaryBackgroundColor = "#1a1a3d"
+# textColor = "#f8f8f2"
+
+# primaryColor = "#1f77b4"
+# backgroundColor = "#fafafa"
+# secondaryBackgroundColor = "#e1e1e1"
+# textColor = "#262730"
+
+# font = "sans serif"
