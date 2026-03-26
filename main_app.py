@@ -7,7 +7,7 @@ import subprocess
 from datetime import datetime
 from PIL import Image
 
-# 1. CONFIGURACIÓN DE PÁGINA (ESTILO FINANCIERO)
+# 1. CONFIGURACIÓN DE PÁGINA (ESTILO FINANCIERO).
 st.set_page_config(
     page_title="Portal TDA: [ MULTIVA ]",
     page_icon="🤖",
