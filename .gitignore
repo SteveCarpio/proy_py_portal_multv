@@ -1,7 +1,7 @@
 __pycache__/
 __pypackages__/
-
 .env
 venv/
-
+.streamlit
+secrets.toml
 
