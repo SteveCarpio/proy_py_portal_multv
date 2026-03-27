@@ -26,7 +26,45 @@ def load_css():
 # -------------------------
 # 🔐 LOGIN 
 # -------------------------
-#aquí la función del login
+# -------------------------
+# 🔐 LOGIN 
+# -------------------------
+def login_screen():
+    if "auth" not in st.session_state:
+        st.session_state.auth = False
+
+    if not st.session_state.auth:
+
+        with st.container():
+            st.markdown('<div class="login-container">', unsafe_allow_html=True)
+            st.markdown('<h4><p class="tag-ia">🔐 Acceso Portal TDA - [Banco Mutiva]</p></h4>', unsafe_allow_html=True)
+            
+            user_input = st.text_input("Usuario")
+            pass_input = st.text_input("Contraseña", type="password")
+
+            aut_t1, aut_t2 = st.columns([3 ,1])
+            with aut_t1:
+                st.caption("Usuario: tda | Contraseña: tda2026")
+            with aut_t2:
+                st.caption("Asistencia: +34 912323232 - info@tda-sgft.com")
+
+            # Bloque del botón:
+            if st.button("Ingresar", use_container_width=True):
+                # Obtenemos el diccionario de usuarios desde secrets
+                lista_usuarios = st.secrets["usuarios"]
+                
+                # Verificamos si el usuario existe y la contraseña es correcta
+                if user_input in lista_usuarios and pass_input == lista_usuarios[user_input]:
+                    st.session_state.auth = True
+                    st.session_state.user = user_input
+                    st.success(f"Bienvenido, {user_input}")
+                    st.rerun()
+                else:
+                    st.error("Usuario o contraseña incorrectos")
+
+
+            st.markdown('</div>', unsafe_allow_html=True)
+        st.stop() # Detiene la ejecución del resto del script si no está logeado
 
 # -------------------------
 # 🔓 LOGOUT
@@ -144,6 +182,7 @@ def mostrar_inicio():
 # 🚀 INICIO APP
 # -------------------------
 load_css()
+login_screen() # <--- AGREGAR ESTO AQUÍ
 
 USER_IP = f'{st.context.ip_address}'
 
@@ -194,18 +233,24 @@ if st.session_state.selected_app_key:
 else:
     mostrar_inicio()
 
+
 # -------------------------
 # 🧠 SIDEBAR FOOTER
 # -------------------------
 st.sidebar.markdown("---")
 
+with st.sidebar:
+    st.write(" ")
+    logout_button()
+
 with st.sidebar.expander("System Status & Support : 🟢", icon=":material/terminal:"):
 
     st.code(f"""
-┌──────────────────────────┐
-│  NETWORK CONNECTED [OK]  │
-└──────────────────────────┘
+┌────────────────────────┐
+│ NETWORK CONNECTED [OK] │
+└────────────────────────┘
  🌐 IP: {USER_IP}
+ 🌐 USER: {st.session_state.user}
     """, language=None)
 
     st.status("**Robot-System-IA** | Syncing...", state="running")
