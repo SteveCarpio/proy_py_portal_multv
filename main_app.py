@@ -6,7 +6,9 @@ import importlib
 from datetime import datetime
 from PIL import Image
 
-# 1. CONFIGURACIÓN DE PÁGINA
+# -------------------------
+# ⚙️ CONFIG
+# -------------------------
 st.set_page_config(
     page_title="Portal TDA: [ MULTIVA ]",
     page_icon="🤖",
@@ -14,102 +16,27 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. ESTILOS CSS OPTIMIZADOS
-st.markdown("""
-<style>
+# -------------------------
+# 🎨 CARGAR CSS
+# -------------------------
+def load_css():
+    with open("styles/styles.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-/* =========================
-   🔹 BASE COMPONENTES
-========================= */
-.card-base {
-    padding: 0.8rem 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    transition: transform 0.2s;
-    box-shadow: 1px 1px 6px rgba(0,0,0,0.05);
-}
+# -------------------------
+# 🔐 LOGIN 
+# -------------------------
+#aquí la función del login
 
-/* =========================
-   🔹 BANNER
-========================= */
-.banner {
-    background-color: #f0f2f6;
-    padding: 0.5rem;
-}
-
-.banner-titulo { 
-    color: #FF6200; 
-    font-weight: bold; 
-    font-size: 0.7rem; 
-}
-
-/* =========================
-   🔹 TARJETAS
-========================= */
-.app-card {
-    background-color: #FFF8F2;
-    border-left: 4px solid #1c2e4a;
-}
-
-.app-card:hover {
-    transform: translateX(5px);
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-}
-
-/* =========================
-   🔹 TITULOS
-========================= */
-.section-title {
-    color: #1c2e4a;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 10px;
-    margin-top: 20px;
-}
-
-.titulo-tda { 
-    color: #555; 
-    font-size: 0.7rem; 
-}
-
-/* =========================
-   🔹 TEXTOS
-========================= */
-.small-text-fin {
-    font-size: 0.75rem;
-    color: #666;
-    line-height: 1.2;
-    margin-top: 5px;
-}
-
-.tag-ia { 
-    color: #FF6200; 
-    font-weight: bold; 
-    font-size: 0.65rem; 
-    text-transform: uppercase; 
-    margin: 2px 0;
-}
-
-/* =========================
-   🔹 SIDEBAR
-========================= */
-[data-testid="stSidebar"] {
-    background-color: #f0f2f6;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# 3. DICCIONARIOS DE APLICACIONES
-IA_APPS = {"Emisores": "app1"}
-DS_APPS = {"Listado Historico": "app2"}
-WS_APPS = {"Trimestrales": "app3"}
-RP_APPS = {"Publicaciones": "app4", "Festivos": "app5"}
-GP_APPS = {"Semanales / Mensuales   ": "app6"}
-XX_APPS = {"Bolsa-MX": "app7", "Global": "app8"}
-
-TODAS_LAS_APPS = {**IA_APPS, **DS_APPS, **WS_APPS, **RP_APPS, **GP_APPS, **XX_APPS}
+# -------------------------
+# 🔓 LOGOUT
+# -------------------------
+def logout_button():
+    if st.sidebar.button("🔓 Cerrar sesión"):
+        st.session_state.auth = False
+        st.session_state.login_time = None
+        st.session_state.user = None
+        st.rerun()
 
 # -------------------------
 # 🔧 HELPERS
@@ -130,12 +57,24 @@ def card(titulo, texto):
     '''
 
 # -------------------------
-# 🏠 PANTALLA INICIO
+# 📊 APPS
+# -------------------------
+IA_APPS = {"Emisores": "app1"}
+DS_APPS = {"Listado Historico": "app2"}
+WS_APPS = {"Trimestrales": "app3"}
+RP_APPS = {"Publicaciones": "app4", "Festivos": "app5"}
+GP_APPS = {"Semanales / Mensuales   ": "app6"}
+XX_APPS = {"Bolsa-MX": "app7", "Global": "app8"}
+
+TODAS_LAS_APPS = {**IA_APPS, **DS_APPS, **WS_APPS, **RP_APPS, **GP_APPS, **XX_APPS}
+
+
+# -------------------------
+# 🏠 HOME
 # -------------------------
 def mostrar_inicio():
-    COL_ANCHO = 0.1
 
-    col_t1, col_t2, col_t3 = st.columns([3, COL_ANCHO ,1])
+    col_t1, col_t3 = st.columns([3 ,1])
 
     with col_t1:
         st.markdown('''
@@ -202,22 +141,25 @@ def mostrar_inicio():
         """, unsafe_allow_html=True)
 
 # -------------------------
-# 🚀 NAVEGACIÓN
+# 🚀 INICIO APP
 # -------------------------
+load_css()
+
 USER_IP = f'{st.context.ip_address}'
 
 if "selected_app_key" not in st.session_state:
     st.session_state.selected_app_key = None
 
+# SIDEBAR
 c1, c2 = st.sidebar.columns(2)
 with c1:
     if st.sidebar.button("🏠 Inicio", use_container_width=True):
         st.session_state.selected_app_key = None
         st.rerun()
 
-# MENÚ
 if st.session_state.selected_app_key is None:
-    st.sidebar.markdown("---")
+    st.sidebar.markdown(" ")
+    st.sidebar.markdown(" ")
 
     cats = {
         "Fideicomisos y Emisiones": (IA_APPS, "handshake"),
@@ -235,7 +177,7 @@ if st.session_state.selected_app_key is None:
                     st.session_state.selected_app_key = name
                     st.rerun()
 
-# EJECUCIÓN
+# CONTENIDO
 if st.session_state.selected_app_key:
     app_name = st.session_state.selected_app_key
     archivo_py = TODAS_LAS_APPS.get(app_name)
